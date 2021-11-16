@@ -1,0 +1,22 @@
+{
+  "name": "theacemanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WillRedLaw/TheAceManager.git"
+  },
+  "author": "William Redmond Lawlor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WillRedLaw/TheAceManager/issues"
+  },
+  "homepage": "https://github.com/WillRedLaw/TheAceManager#readme",
+  "dependencies": {
+    "electron": "^16.0.0"
+  }
+}
