@@ -2,9 +2,12 @@
   "name": "theacemanager",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "./src/main.js",
   "scripts": {
-    "start": "electron ."
+    "devStart": "nodemon server.js",
+    "start": "electron .",
+    "rebuild": "electron-rebuild",
+    "DATABASE": "../src/javascript/DatabaseConnection"
   },
   "repository": {
     "type": "git",
@@ -17,7 +20,24 @@
   },
   "homepage": "https://github.com/WillRedLaw/TheAceManager#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "electron": "^16.0.0"
+    "boxicons": "^2.0.9",
+    "dotenv": "^14.2.0",
+    "electron": "^16.0.0",
+    "electron-builder": "^22.14.5",
+    "express": "^4.17.2",
+    "ffmpeg-static": "^4.4.1",
+    "ffprobe-static": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.2.2",
+    "nfc-pcsc": "^0.8.1",
+    "python-shell": "^3.0.1",
+    "serialport": "^9.2.8",
+    "speakeasy": "^2.0.0",
+    "usb-detection": "^4.13.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^3.2.5",
+    "nodemon": "^2.0.15"
   }
 }

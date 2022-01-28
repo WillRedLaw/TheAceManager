@@ -1,0 +1,98 @@
+<html>
+
+    <head>
+
+        <title>Testing Custom Title</title>
+        <link rel="stylesheet" href="../CSS/stylesheet.css">
+        <script defer src="../javascript/titlebar.js"></script>
+        <script src="../authentication/server.js"></script>
+
+    </head>
+
+    <body>
+
+        <div class = "MainPart">
+              <div class ="TopBar">
+
+                  <div class = "TitleBar">
+
+                    <button id="showHideMenus" class ="toggleButton"></button>
+
+                    <div class = "title">
+
+                        The Ace Manager
+
+                    </div>
+
+                 </div>
+
+                 <div class="TitleBarBtns">
+
+                    <button id ="minimizeBtn" class = "TopBtn minimizeBtn" title = "Minimize"></button>
+                    <button id ="maxResBtn" class = "TopBtn maximizeBtn" title = "Maximize"></button> 
+                    <button id ="closeBtn" class = "TopBtn closeBtn" title = "Close"></button>
+
+                 </div>
+
+              </div>
+              
+              <div class="contentArea">
+                  <div id="mySidebar" class = "leftMenu">
+
+                    <label for="Setting Menu"></label>
+                    <label for="Password Generation"></label>
+                    <label for="Profile"></label>
+
+                  </div>
+
+                  <div class="contentPages">
+
+                    <form action="PasswordField">
+                        
+                        <br>
+                        <input type="text" placeholder="Search for Password"> <button class="SearchPassword">Search</button>
+                        <br>
+                        
+                        <br>
+                        <label for="Password">Password Title:</label>
+                        <br>
+                        <label for="Password">Password Password: </label>
+                        <input type="text" id="Password" name="PasswordField"><br><br>
+
+                        <label for="Password">Password Title:</label>
+                        <br>
+                        <label for="Password">Password Password: </label>
+                        <input type="text" id="Password" name="PasswordField"><br><br>
+
+                        <label for="Password">Password Title:</label>
+                        <br>
+                        <label for="Password">Password Password: </label>
+                        <input type="text" id="Password" name="PasswordField"><br><br>
+
+                        <label for="Password">Password Title:</label>
+                        <br>
+                        <label for="Password">Password Password: </label>
+                        <input type="text" id="Password" name="PasswordField"><br><br>
+                        
+                        <br> 
+                        
+                        <button  class="AddPassword">Add Password</button>  <button class="EditPassword">Edit Password</button>
+
+                        <br> 
+
+                        <a href="../HTML/PasswordGenerator.html" >Select me</a>
+
+                      </form>
+
+                  </div>
+
+              </div>
+
+
+        </div>
+
+
+    </body>
+
+
+</html>
