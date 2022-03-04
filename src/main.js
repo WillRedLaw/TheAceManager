@@ -1,12 +1,21 @@
-const { create } = require('combined-stream')
+/*
+
+    This is the start up file for the application, here is where everything to do with the screens of the application can be controlled. 
+    When the command npm start is used this is where the file path will go, it is linked to the package-json file which
+    also helps to control the application. 
+
+*/
+
+//required variables to access file requirements. 
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const ipc = ipcMain
 
 
+//Function declaration for the Parent Window IE the login screen you see upon start up of the application. 
 function createParentWindow(){
 
-  const win = new BrowserWindow({
+  const ParentWindow = new BrowserWindow({
 
       width: 400,
       height: 600,
@@ -18,34 +27,41 @@ function createParentWindow(){
         contextIsolation: false,
         devTools: false,
 
-
       }
 
   })
 
-  win.loadFile('./src/HTML/Login.html')
+//calls the HTML file from the source folder for the Login
+ParentWindow.loadFile('./src/HTML/Login.html')
 
-  ipc.on('SwitchWindow', () =>{
+//While on the parent window, it will listen out for the response "SwitchWindow", which will than call this. 
+ipc.on('SwitchWindow', () =>{
 
-    win.close()
+  //close the current parent window
+  ParentWindow.hide()
+  
+  //Open a child window
+  app.whenReady().then(() => {
+    createChildWindow()
     
-    app.whenReady().then(() => {
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      
       createChildWindow()
-    
-      app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-          createChildWindow()
-        }
-      })
-    })
+
+
+    }
+  })
+})
     
 
-  })
+})
 
 }
 
+//The Same as the parent APP except for the child window
 function createChildWindow () {
-  const win = new BrowserWindow({
+  const ChildWindow = new BrowserWindow({
     width: 1000,
     height: 1000,
     frame: false,
@@ -53,40 +69,56 @@ function createChildWindow () {
 
         nodeIntegration: true,
         contextIsolation: false,
-        
+        preload: path.join(__dirname, "../src/javascript/PasswordGenerator/CallPassword.js"),
         devTools: false,
   
     }
   })
 
-  win.loadFile('./src/HTML/mainWindow.html')
 
+  //calls the mainWindow file from the source folder
+  ChildWindow.loadFile('./src/HTML/mainWindow.html')
+  
+  //listens out to the close app command and closes the window
   ipc.on('closeApp', () =>{
-    win.close()
-  })
-  ipc.on('minimizeApp', () =>{
-    win.minimize()
+    app.quit()
+    
   })
 
+  //listen out to the minimize command and minimizes the window
+  ipc.on('minimizeApp', () =>{
+    ChildWindow.minimize()
+  })
+
+  //listens out for the maximize command and maximizes the window 
   ipc.on('maximizeApp', () => {
-    if(win.isMaximized()){
-      win.restore()
+    if(ChildWindow.isMaximized()){
+      ChildWindow.restore()
     } 
 
     else{
-      win.maximize();
+      ChildWindow.maximize();
     }
   })
 
-  win.on('maximize', () => {
-    win.webContents.send('isMaximized')
+  ipc.on('PasswordRequested',()=>{
+    console.log("clicked")
+    ChildWindow.webContents.send('PasswordRequested')
   })
 
-  win.on('restored', () => {
-    win.webContents.send('isRestored')
+  //sender for max
+  ChildWindow.on('maximize', () => {
+    ChildWindow.webContents.send('isMaximized')
+  })
+
+  //sender for restore
+  ChildWindow.on('restored', () => {
+    ChildWindow.webContents.send('isRestored')
+    
   })
 }
 
+//creator function for the parent window
 app.whenReady().then(() => {
   createParentWindow()
 
@@ -97,6 +129,7 @@ app.whenReady().then(() => {
   })
 })
 
+//checker
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()

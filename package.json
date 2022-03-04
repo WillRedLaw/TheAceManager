@@ -4,10 +4,8 @@
   "description": "",
   "main": "./src/main.js",
   "scripts": {
-    "devStart": "nodemon server.js",
     "start": "electron .",
-    "rebuild": "electron-rebuild",
-    "DATABASE": "../src/javascript/DatabaseConnection"
+    "rebuild": "electron-rebuild"
   },
   "repository": {
     "type": "git",
@@ -29,11 +27,11 @@
     "ffprobe-static": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.2",
+    "mongoose": "^6.1.8",
     "nfc-pcsc": "^0.8.1",
     "python-shell": "^3.0.1",
     "serialport": "^9.2.8",
     "speakeasy": "^2.0.0",
-    "usb-detection": "^4.13.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

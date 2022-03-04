@@ -6,19 +6,14 @@ const jwt = require('jsonwebtoken')
 
 app.use(express.json())
 
-
-const posts = [{
-
-    username: 'Will',
-    title: '1'
-
-
-}]
+const port = 3000;
 
 //DummyData
 app.get('/posts', authenticateToken, (req, res) =>{
     res.json(posts.filter(post => post.username === req.user.name))
 })
+
+
 
 app.post('/login', (req, res) =>{
     
@@ -46,4 +41,28 @@ function authenticateToken(req, res, next){
     })
 }
 
-app.listen(3000);
+app.get("/test",  (req, res) => {
+    res.send("Server is Healthy!");
+  });
+
+
+app.get("/password", callPassword); 
+
+
+app.listen(port, ()=> {
+    console.log(`App is listening at http://locahost:${port}`);
+});
+
+function callPassword(req, res) {
+
+    var spawn = require("child_process").spawn;
+
+    var process = spawn('python', ["src/PythonScript/password.py", req.query.password]);
+
+    process.stdout.on('data',function(data){
+
+        
+        res.send(data.toString());
+    })
+
+}
