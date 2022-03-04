@@ -11,6 +11,8 @@
 const {ipcRenderer} = require('electron')
 const { response } = require('express')
 const { get } = require('express/lib/response')
+const http = require('https')
+const { callbackify } = require('util')
 const ipc = ipcRenderer
 const maxResBtn = document.getElementById('maxResBtn')
 
@@ -68,7 +70,8 @@ ipc.on('isRestored', () =>{
  */
 
  const GenPassword = document.getElementById('GetPassword');
-
+ var DisplayPassword = document.getElementById('Change');
+ var change = "THIS PART IS WORKING"
  
  
  //Listener
@@ -78,20 +81,28 @@ ipc.on('isRestored', () =>{
  
  ipc.on('PasswordRequested', ()=>{
     
-    getPassword()
+    change.innerText = getPassword(change)
 
          
  })
  
- function getPassword(change){
-
-    var DisplayPassword = document.getElementById('Change');
-    var change = "THIS PART IS WORKING"
+ function getPassword(){
     
-    fetch('https:localhost:3000/password').then(response => response.json()).then(data =>{
-        console.log(data)
-    })
+    http.get('http://localhost:3000/password', (response)=>{
+        console.log(response)
+        
+    let data = '';
 
+    response.on('data', function(request){
+        var newpassword = request
+        return newpassword
+    })
+        
+    
+
+    
+    })
+    
  }
 
  /*
