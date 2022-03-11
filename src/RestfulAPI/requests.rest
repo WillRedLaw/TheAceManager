@@ -11,3 +11,11 @@ Content-Type: application/json
 {
     "username": "Will"
 }
+
+
+  ipc.handle('PasswordRequested', async(change, ()=>{
+    const result = await getPassword(change)
+    return JSON.parse(result)
+    console.log("clicked")
+    
+  }),

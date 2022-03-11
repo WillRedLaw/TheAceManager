@@ -63,6 +63,7 @@ function callPassword(req, res) {
 
         
         res.send(data.toString());
+        res.end()
     })
 
 }

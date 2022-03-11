@@ -9,6 +9,8 @@
 //required variables to access file requirements. 
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
+const axios = require('axios')
+const { type } = require('express/lib/response')
 const ipc = ipcMain
 
 
@@ -48,7 +50,6 @@ ipc.on('SwitchWindow', () =>{
     if (BrowserWindow.getAllWindows().length === 0) {
       
       createChildWindow()
-
 
     }
   })
@@ -101,11 +102,15 @@ function createChildWindow () {
     }
   })
 
+  //sender for requesting a generated password
   ipc.on('PasswordRequested',()=>{
-    console.log("clicked")
     ChildWindow.webContents.send('PasswordRequested')
   })
 
+  ipc.on('SideMenu', () => {
+    console.log('clicked')
+    ChildWindow.webContents.send('SideMenu')
+  })
   //sender for max
   ChildWindow.on('maximize', () => {
     ChildWindow.webContents.send('isMaximized')
@@ -135,3 +140,5 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+
+

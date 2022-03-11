@@ -2,9 +2,9 @@ html, body{
   margin: 0;
   padding:0;
   font-size: 10pt;
-  font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #c4cddf;
-  background-color: #263D4D;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #949AA7;
+  background-color: #2C312C;
 }
 
 .MainPart{
@@ -14,24 +14,22 @@ html, body{
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border: 1px solid #263D4D;
+  border: 1px solid #343B48;
   -webkit-box-sizing: border-box;
 }
 
 .MainPart > .TopBar{
-
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 40px;
     border-bottom: 3px solid #343B48;
-    background-color: #183042;
+    background-color: #1B1D23;
     -webkit-user-select: none;
 
 }
 
-.TopBar > .TitleBar{
-
+.TopBar > .TitleBar{ 
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -46,11 +44,10 @@ html, body{
 }
 
 .TitleBar > .toggleButton{
-  
   width: 45px;
   height: 40px;
   border: none;
-  outline: line;
+  outline: none;
   background-color: transparent;
   background-image:"";
   background-repeat: no-repeat;
@@ -65,7 +62,7 @@ html, body{
 }
 
 .TitleBar > .toggleButton:active{
-  background-color: transparent;
+  background-color: #4F9FEE;
 }
 
 .TitleBar > img{
@@ -74,20 +71,18 @@ html, body{
 
 .TitleBar>.title{
   margin-left: 10px;
-  width: auto;
+  width: 100%;
   line-height: 30px;
   margin-top: 5px;
   padding-bottom: 5px;
   -webkit-app-region: drag;
-
 }
 
 .TopBar > .TitleBarBtns{
-  display: flex;
+  display: flex;  
   flex-direction: row;
   width: 120px;
   height: 40px;
-
 }
 
 .TitleBarBtns > .TopBtn{
@@ -101,8 +96,6 @@ html, body{
   background-position: center;
   transition: 0.2s;
   cursor: pointer;
-
-
 }
 
 .TitleBarBtns > .TopBtn:hover{
@@ -111,7 +104,7 @@ html, body{
 }
 
 .TitleBarBtns > .TopBtn:active{
-  background-color: #4f9fff;
+  background-color: #4F9FEE;
 }
 
 .TitleBarBtns > .minimizeBtn{
@@ -140,12 +133,20 @@ html, body{
 }
 
 .contentArea > .leftMenu{
-  width: 280px;
+  width:280px;
+  height: 100%;
+  background-color: #272C36;
+  transition: 0,4s;
+}
+
+.contentArea > .contentPages{
+  width: 100%;
   height: 100%;
   -webkit-box-align: center;
-  -webkit-box-pack: center;
+  -webkit-box-pack: center;  
   display: -webkit-box;
 }
+
 
 .AddPassword{
   margin-right:  20px;

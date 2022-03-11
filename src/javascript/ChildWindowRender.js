@@ -9,12 +9,13 @@
 
 //Variables
 const {ipcRenderer} = require('electron')
-const { response } = require('express')
-const { get } = require('express/lib/response')
-const http = require('https')
-const { callbackify } = require('util')
+const axios = require('axios');
+const { is } = require('express/lib/request');
 const ipc = ipcRenderer
 const maxResBtn = document.getElementById('maxResBtn')
+const GenPassword = document.getElementById('GetPassword');
+const mySidebar= document.getElementById('mySidebar')
+var isLeftMenuActive = true;
 
 //Listener Close
 closeBtn.addEventListener('click', () =>{
@@ -50,7 +51,6 @@ function ChangeMaxResBtn(isMaximizedApp){
         maxResBtn.classList.add('maximizeBtn')
 
     }
-
 }
 
 //sender for max
@@ -63,64 +63,44 @@ ipc.on('isRestored', () =>{
     ChangeMaxResBtn(false)
 })
 
+showHideMenus.addEventListener('click', ()=>{
+    if(isLeftMenuActive){
+        mySidebar.style.width ='0px'
+        isLeftMenuActive = false
+    }
+    else{
+        mySidebar.style.width ='280px'
+        isLeftMenuActive = true
+    }
+})
 
 
 /**
  * -------------------------------------
- */
-
- const GenPassword = document.getElementById('GetPassword');
- var DisplayPassword = document.getElementById('Change');
- var change = "THIS PART IS WORKING"
- 
- 
- //Listener
+ */ 
+ //sender
  GenPassword.addEventListener('click', () =>{
-     ipc.send('PasswordRequested')
+    ipc.send('PasswordRequested')
  })
- 
+ //listener than send request to server using Axios
  ipc.on('PasswordRequested', ()=>{
-    
-    change.innerText = getPassword(change)
 
-         
- })
- 
- function getPassword(){
-    
-    http.get('http://localhost:3000/password', (response)=>{
-        console.log(response)
-        
-    let data = '';
-
-    response.on('data', function(request){
-        var newpassword = request
-        return newpassword
-    })
-        
-    
-
-    
-    })
-    
- }
-
- /*
-function getPassword1(){
-
-    $.ajax({
-        
-        method : 'GET',
-        url : '/password',
-        success : function(data){
-            
-            console.log("Success", data)
-            return data
-        },
-
-        error: function(err){
-            console.log('Failed');
+    makeRequest()
+    async function makeRequest(){
+        const PASSWORD = {
+          method:'get',
+          url: 'http://localhost:3000/password',
+          
+          
         }
-    });
-}
-*/
+    
+        let res = await axios(PASSWORD)
+        console.log(res.data)
+        document.getElementById('Change').innerText = res.data
+    
+      }
+    
+ })
+ /**
+ * -------------------------------------
+ */ 
